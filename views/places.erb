@@ -1,0 +1,25 @@
+<section class="uk-section">
+    <div class="uk-container-large">
+        <div class="uk-child-width-1-2@s uk-grid-match" uk-grid>
+        <% for places in @places %>
+            <div>
+                <a href="/places/<%= places[:id] %>">
+                <div class="uk-card uk-card-default uk-card-hover uk-height-medium uk-overlay-default " >
+                
+                <img src="<%= places[:image] %>" width="100%" class="uk-align-center">
+                <div class="uk-overlay-default uk-position-cover"></div>
+                    <div class="uk-overlay uk-dark uk-position-center">
+                        <h1 class="uk-card-title" ><%= places[:city] %></h1>
+                    </div>
+                            
+                                
+                        
+                </div>
+                </a>
+            </div>
+        <% end %>
+            
+
+        </div>
+    </div>
+</section>

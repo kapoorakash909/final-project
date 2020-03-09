@@ -1,0 +1,39 @@
+
+<div class="uk-border-rounded uk-card uk-card-default uk-card-body uk-flex-center uk-align-center uk-width-large">
+    
+<h3><center> Add top activity for <%= @places[:city] %> </center></h3>
+    
+    <h5><center>Add your top activity to do in <%= @places[:city] %>.</center></h5>
+    
+<form action="/places/<%= @places[:id] %>/activities/create" class="body-text" >
+    <fieldset class="uk-fieldset">
+
+        <div class="uk-margin">
+            <div class="uk-form-controls uk-inline uk-width-1-1">
+            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: user"></span>
+            <input type="text" class="uk-input uk-border-pill" name="title" placeholder="Activity Title"  id="title"></div>
+        </div>
+        <div class="uk-margin">
+            <div class="uk-form-controls uk-inline uk-width-1-1">
+                <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: grid"></span>
+                <div class="uk-margin">
+                    <select class="uk-select" name="type" id="type">
+                        <option>Family</option>
+                        <option>Adventure</option>
+                        <option>Party</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="uk-margin">
+            <div class="uk-form-controls uk-inline uk-width-1-1">
+                <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: file-edit"></span>
+                <textarea class="uk-textarea" rows="5" placeholder="Activity description" id="description" name="description"></textarea>
+            </div>
+        </div>
+        
+    </fieldset>
+  <button type="submit" class="uk-button uk-button-primary uk-border-pill uk-width-1-1">Add activity</button><br/><br/>
+  <a href="/places/<%= @places[:id] %>" class="uk-button uk-button-secondary uk-border-pill uk-width-1-1">Back to <%= @places[:city] %> page</a>
+</form>
+</div>

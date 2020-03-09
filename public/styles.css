@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Spartan&display=swap');
+.uk-card-title {
+    text-transform:uppercase;
+    font-family: 'Spartan', sans-serif;
+}
+.body-text {
+    font-size: 14px;
+}
+body {
+    font-family: 'Spartan', sans-serif;
+}
+.sections-title {
+    text-transform:uppercase;
+    font-family: 'Spartan', sans-serif;
+}
+.small-text {
+    font-size: 10px;
+}

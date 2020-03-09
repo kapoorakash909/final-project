@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+   <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Google Fonts -->
+   
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css" crossorigin="anonymous">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/uikit@latest/dist/css/uikit.min.css">
+    
+    <!-- Your own CSS -->
+    <link rel="stylesheet" href="/styles.css">
+
+    <title>TripIt</title>
+  </head>
+  <body class="uk-background-primary uk-height-viewport" data-uk-height-viewport>
+    
+    <nav class="uk-navbar-container uk-section-primary " uk-navbar style="position: relative; z-index: 980; background-color: #1E87F0;">
+    <div class="uk-navbar-left uk-margin-left">
+        <a href="/"><img src="/images/logo.png" width="350"></a>
+    </div>
+    <div class="uk-navbar-right">
+
+            <ul class="uk-navbar-nav">
+                <li><a href="/">Places Home</a></li>
+               
+                <% if session["user_id"] %>
+                <li>
+                <a href="#">Logged in as <%= session["username"] %></a>
+                <div class="uk-navbar-dropdown">
+                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                        <li class="uk-active"><a href="/logout" class="nav-link" style="color:#000000">Logout</a></li>
+                    </ul>
+                </div>
+                </li>
+                
+                <% else %>
+                    <li><a href="/users/create_user">Sign up</a></li>
+                    <li><a href="/logins/create_login">Login</a></li>
+                <% end %>
+                </ul>
+
+        </div>
+    </nav>
+<div class="uk-section uk-section-primary uk-preserve-color">
+    <div class="uk-container uk-flex uk-flex-center uk-flex-middle">
+      <%= yield %>
+    </div>
+</div>
+
+   <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit-icons.min.js"></script>
+  </body>
+</html>

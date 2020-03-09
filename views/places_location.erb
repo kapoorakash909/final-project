@@ -1,0 +1,101 @@
+<section class="uk-section">
+    <div class="uk-container">
+        <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
+            <div class="uk-card-media-left uk-cover-container">
+                <iframe
+                width="600"
+                height="100%"
+                frameborder="0" style="border:0"
+                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCtovsQvkIUWlNqtYwXY87gEd4ZSmJEhMw
+                &q=<%= @lat_long[0] %>,<%= @lat_long[1] %>&zoom=12" allowfullscreen>
+                </iframe>
+                
+            </div>
+            <div>
+                <div class="uk-card-body">
+                    <h3 class="uk-card-title"><%= @places[:city] %></h3>
+                    <h4>Population: <%= @places[:population] %></h4>
+                    <h4>Fun Fact: <%= @places[:fun_fact] %></h4>
+                    <p><%= @places[:description] %></p>
+                    <% if session["user_id"] %>
+                        <a href="/places/<%= @places[:id] %>/activities/new" class="uk-button uk-button-primary uk-button-large"><i class="fas fa-plus-circle"></i> Add Top Activity</a>
+                    <% else %>
+                        <a class="uk-button uk-button-primary uk-button-large" href="#modal-center" uk-toggle><i class="fas fa-plus-circle"></i> Add Top Activity</a>
+
+                        <div id="modal-center" class="uk-flex-top" uk-modal>
+                            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-text-center">
+
+                                <button class="uk-modal-close-default" type="button" uk-close></button>
+                                <i class="fas fa-times-circle fa-3x uk-alert-danger"></i>
+                                <h3>Please login to contribute to our platform and add your top activity.</h3>
+                                <a href="/users/create_user" class="uk-button uk-button-primary">Sign up</a> 
+                                <a href="/logins/create_login" class="uk-button uk-button-primary">Login</a>
+                            </div>
+                        </div>
+                    <% end %>
+                    <h4 style="text-transform:uppercase;font-family:'Spartan';font-weight:bold;"> Top Activities </h4>
+                    <p>Check out activities contributed by our users - add your favourite activity or cast your votes! </p>
+                    <hr>
+                    <div uk-filter="target: .js-filter">
+                        
+                        <ul class="uk-subnav uk-subnav-pill">
+                            <li class="uk-active" uk-filter-control><a href="#">All</a></li>
+                            <li uk-filter-control=".Family"><a href="#">Family</a></li>
+                            <li uk-filter-control=".Party"><a href="#">Party</a></li>
+                            <li uk-filter-control=".Adventure"><a href="#">Adventure</a></li>
+                        </ul>
+                        
+                        
+                        <ul class="js-filter uk-child-width-1-1" uk-grid>
+
+                        <% for activity in @activities %>
+                            <li class="<%= activity[:type] %>">
+                                <% @activity_user = activity[:user_id] %>
+                                <h5 class="sections-title" style="text-transform:uppercase;font-family:'Spartan';font-weight:bold;"><%= activity[:title] %></h5>
+                                <p><%= activity[:description] %></p>
+                                <p style="font-size:10px;">Contributed by 
+                                <%= users_table = DB.from(:users)
+                                @users1 = users_table.where(id: @activity_user).to_a[0]
+                                 %>
+                                 <%= @users1[:name] %></p>
+                                <span class="uk-label" style="font-size:10px;"><%= activity[:type] %></span>
+                                <% 
+                                votes_table = DB.from(:votes)
+                                a_id = activity[:id]
+                                @votes_count = votes_table.where(activities_id: activity[:id] ).sum(:votes) 
+                                @votes_user_count = votes_table.where(activities_id: activity[:id], user_id: session["user_id"] ).sum(:votes) %>
+                                
+                                
+                                <span class="uk-align-right" style="font-size:10px;">
+
+                                <% if @votes_user_count == nil or @votes_user_count != 1  %>
+                                    <a href="/places/<%= @places[:id] %>/upvote?activities_id=<%= a_id %>&votesincrement=1" style="font-size:10px;" class="uk-alert-success">&#x25B2; Upvote</a>
+                                <% end %>
+                                <% if @votes_user_count == nil or @votes_user_count != -1  %>
+                                    <a href="/places/<%= @places[:id] %>/upvote?activities_id=<%= a_id %>&votesincrement=-1" style="font-size:10px;"class="uk-alert-danger">&#x25BC; Downvote</a>
+                                <% end %>
+                                   
+                                </span>
+                                
+                                <span class="uk-label uk-align-right" style="font-size:10px;">
+                                    <% if @votes_count == nil %>
+                                        No votes
+                                    <% else %>
+                                    Votes: <%= @votes_count %>
+                                    <% end %>
+                                </span>
+                                
+                                <hr>
+                            </li>
+                            
+                        <% end %>
+                        
+                        </ul>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
