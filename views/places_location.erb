@@ -54,7 +54,7 @@
                                 <h5 class="sections-title" style="text-transform:uppercase;font-family:'Spartan';font-weight:bold;"><%= activity[:title] %></h5>
                                 <p><%= activity[:description] %></p>
                                 <p style="font-size:10px;">Contributed by 
-                                <%= users_table = DB.from(:users)
+                                <% users_table = DB.from(:users)
                                 @users1 = users_table.where(id: @activity_user).to_a[0]
                                  %>
                                  <%= @users1[:name] %></p>
