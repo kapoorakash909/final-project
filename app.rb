@@ -24,8 +24,8 @@ votes_table = DB.from(:votes)
 # put your API credentials here (found on your Twilio dashboard)
 account_sid = ENV["TWILIO_ACCOUNT_SID"]
 auth_token = ENV["TWILIO_AUTH_TOKEN"]
-
-# set up a client to talk to the Twilio REST API
+#stored in environment
+# set up a client to talk to the Twilio REST APIS
 client = Twilio::REST::Client.new(account_sid, auth_token)
 
 
